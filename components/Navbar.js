@@ -5,9 +5,12 @@ import Link from "next/link";
 import { Text } from "@nextui-org/react";
 import { useRouter } from "next/router";
 
+import { useRecoilState } from 'recoil';
+import { gradeData, username, password } from '../utils/states';
+
 export default function Navbar() {
-    var router = useRouter();
     const [visible, setVisible] = useState(false);
+    const [grade, setGradeData] = useRecoilState(gradeData);
 
     const handler = () => {
         setVisible(true);
@@ -39,24 +42,16 @@ export default function Navbar() {
                 </div>
                 <div className="gnb-wrap">
                     <div className="gnb-menu-right">
-                        <Link href="/about">
-                            <a>
-                                <Text
-                                    h3
-                                    size={30}
-                                    >
-                                        about
-                                </Text>
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="gnb-menu-right">
-                        <Button auto color="warning" shadow onClick={handler}>
-                            로그인
-                        </Button>
+                        {
+                            grade ? null 
+                                :
+                            <Button auto color="warning" shadow onClick={handler}>
+                                로그인
+                            </Button> 
+                        }
+
                     </div>
                 </div>
-
             </div>
 
             <style jsx>{`
@@ -72,16 +67,16 @@ export default function Navbar() {
 
                 .gnb-wrap {
                     display: flex;
-                    margin-right: 10%;
+                    margin-right: 10vw;
                     align-self: end;
                 }
 
                 .gnb-menu-right {
-                    margin-right: 10%;
+                    margin-right: 10vw;
                 }
 
                 .gnb-menu-left {
-                    margin-left: 10%;
+                    margin-left: 10vw;
                 }
             `}</style>
         </nav>

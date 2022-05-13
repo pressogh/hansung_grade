@@ -5,11 +5,26 @@ import Title from "../components/Title";
 
 import { useRecoilState } from "recoil";
 import { gradeData } from "../utils/states";
+import { getGrade } from "../utils/api";
 
 const GradeGraph = dynamic(() => import("../components/Graph"), { ssr: false });
 
 export default function Home() {
-    const [grade, setGradeData] = useRecoilState(gradeData);    
+    const [grade, setGradeData] = useRecoilState(gradeData);
+
+    useEffect(() => {
+        const username = localStorage.getItem("username");
+        const password = localStorage.getItem("password");
+
+        if (username !== null && password !== null) {
+            getData(username, password);
+        }
+    }, [])
+
+    const getData = async (username, password) => {
+        setGradeData(await getGrade(username, password));
+    }
+    
 
     return (
         <div>
