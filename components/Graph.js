@@ -1,9 +1,23 @@
-import { Card } from '@nextui-org/react';
+import { Card, Text } from '@nextui-org/react';
 import { ResponsiveLine } from '@nivo/line'
 import { BasicTooltip } from '@nivo/tooltip';
 import { parseAvgGrade } from "../utils/util";
 
 export default function GradeGraph({ data }) {
+    const weight = {
+        "A+": 4.5,
+        "A0": 4.0,
+        "B+": 3.5,
+        "B0": 3.0,
+        "C+": 2.5,
+        "C0": 2.0,
+        "D+": 1.5,
+        "D0": 1.0,
+        "F0": 0.0,
+        "P": 0.2,
+        "N": 0.1
+    };
+
     return (
         <>
             <ResponsiveLine
@@ -52,10 +66,20 @@ export default function GradeGraph({ data }) {
                     }
                 ]}
                 tooltip={(input) => {
+                    let lst = input.point.data.subject.slice();
+                    lst.sort((a, b) => {
+                        if (weight[a.grade] < weight[b.grade]) return 1;
+                        else return -1;
+                    })
+
                     return (
                         <Card className="tooltip-container">
+                            <div className='tooltip-item title'>
+                                <Text weight={"bold"}>평균평점</Text>
+                                <Text>{input.point.data.y}</Text>
+                            </div>
                             {
-                                input.point.data.subject.map((item) => {
+                                lst.map((item) => {
                                     return (
                                         <div key={item.name} className="tooltip-item">
                                             <div className='tooltip-name'>
@@ -77,6 +101,10 @@ export default function GradeGraph({ data }) {
                 .tooltip-container {
                     padding: 10px;
                     border: 1px solid black;
+                }
+
+                .title {
+                    margin-bottom: 1vh;
                 }
 
                 .tooltip-item {

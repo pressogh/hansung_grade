@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import dynamic from 'next/dynamic'
-import { Button, Loading } from "@nextui-org/react";
+import { Button, Card, Loading } from "@nextui-org/react";
 import Title from "../components/Title";
 
 import { useRecoilState } from "recoil";
@@ -25,7 +25,8 @@ export default function Home() {
 
             <style jsx>{`
                 .chart {
-                    height:50vh;
+                    margin-top: 20vh;
+                    height:40vh;
                     width:50vw;
                     background: white;
                 }
