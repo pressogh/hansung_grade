@@ -26,5 +26,5 @@ export const getGrade = async (username, password) => {
             console.log("[Error] ", error);
         })
 
-    return res;
+    return JSON.parse(res);
 }
