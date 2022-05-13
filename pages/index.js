@@ -42,7 +42,7 @@ export default function Home() {
                 .chart {
                     margin-top: 20vh;
                     height:40vh;
-                    width:50vw;
+                    width:80vw;
                     background: white;
                 }
             `}</style>
