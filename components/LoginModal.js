@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
 import { Password } from "./icons/Password";
 import { StudentNumber } from "./icons/StudentNumber";
+import { getGrade } from "../utils/api";
+
+import { useRecoilState } from 'recoil';
+import { gradeData, username, password } from '../utils/states';
+
 
 export default function LoginModal({ visible, closeHandler }) {
+    const [id, setId] = useRecoilState(username);
+    const [passwd, setPassword] = useRecoilState(password);
+    const [grade, setGradeData] = useRecoilState(gradeData);
+
+    const handleIdChange = (e) => {
+        setId(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const handleLoginButtonClick = async () => {
+        closeHandler();
+        setGradeData("loading");
+        setGradeData(await getGrade(id, passwd));
+    }
+
     return (
         <Modal
             closeButton
@@ -33,28 +56,25 @@ export default function LoginModal({ visible, closeHandler }) {
                     size="lg"
                     placeholder="학번"
                     contentLeft={<StudentNumber fill="currentColor" />}
+                    onChange={handleIdChange}
+                    value={id}
                 />
-                <Input
-                    clearable
-                    bordered
-                    fullWidth
-                    color="primary"
-                    size="lg"
-                    placeholder="비밀번호"
+                <Input.Password
                     contentLeft={<Password fill="currentColor" />}
+                    onChange={handlePasswordChange}
+                    value={passwd}
                 />
                 <Row justify="space-between">
                     <Checkbox>
                         <Text size={14}>로그인 유지</Text>
                     </Checkbox>
-                    <Text size={14}>비밀번호 찾기</Text>
                 </Row>
             </Modal.Body>
             <Modal.Footer>
                 <Button auto flat color="error" onClick={closeHandler}>
                     닫기
                 </Button>
-                <Button auto onClick={closeHandler}>
+                <Button auto onClick={handleLoginButtonClick}>
                     로그인
                 </Button>
             </Modal.Footer>

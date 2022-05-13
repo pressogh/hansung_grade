@@ -1,22 +1,33 @@
 import React from "react";
-import { Button } from "@nextui-org/react";
+import { Button, Loading } from "@nextui-org/react";
 import Title from "../components/Title";
 import LoginModal from "../components/LoginModal";
 
+import { useRecoilState } from 'recoil';
+import { gradeData } from '../utils/states';
+
 export default function Home() {
-  const [visible, setVisible] = React.useState(false);
-  const handler = () => setVisible(true);
-  const closeHandler = () => {
-      setVisible(false);
-      console.log("closed");
-  };
+  const [grade, setGradeData] = useRecoilState(gradeData);
+
   return (
       <div>
-          <Title title="한움" />
-          <Button auto color="warning" shadow onClick={handler}>
-              Open modal
-          </Button>
-          <LoginModal visible={visible} closeHandler={closeHandler} />
+        	<Title title="한움" />
+            <div>
+                {
+                    grade === 'loading' ?
+                        <Loading size="xl" className="loading" />
+                    :
+                        grade
+                }
+            </div>
+
+            <style jsx>{`
+                .loading {
+                    display: flex;
+                    self-direction: center;
+                    justify-self: center;
+                }
+            `}</style>
       </div>
   );
 }
