@@ -31,3 +31,4 @@ yarn-error.log*
 # vercel
 .vercel
 data.json
+.idea
