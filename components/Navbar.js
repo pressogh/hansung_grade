@@ -3,10 +3,9 @@ import { Button } from "@nextui-org/react";
 import LoginModal from "../components/LoginModal";
 import Link from "next/link";
 import { Text } from "@nextui-org/react";
-import { useRouter } from "next/router";
 
 import { useRecoilState } from 'recoil';
-import { gradeData, username, password } from '../utils/states';
+import { gradeData } from '../utils/states';
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);
@@ -55,6 +54,10 @@ export default function Navbar() {
             </div>
 
             <style jsx>{`
+                .navbar {
+                    margin-top: 1vh;
+                }
+                
                 .container {
                     display: flex;
                     justify-content: space-between;
@@ -67,7 +70,6 @@ export default function Navbar() {
 
                 .gnb-wrap {
                     display: flex;
-                    margin-right: 10vw;
                     align-self: end;
                 }
 

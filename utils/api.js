@@ -1,7 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 
-export const getGrade = async (username, password, rememberme) => {
+export const getGrade = async (username, password, rememberMe) => {
     const data = {
         "username": username,
         "password": password
@@ -26,7 +25,7 @@ export const getGrade = async (username, password, rememberme) => {
             console.log("[Error] ", error);
         })
 
-    if (rememberme === true) {
+    if (rememberMe === true) {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
     }

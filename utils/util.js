@@ -1,4 +1,4 @@
-export function parseAvgGrade(data) {
+export function parseGPA(data) {
     let semester = [];
 
     for (let item in data) {
@@ -11,13 +11,70 @@ export function parseAvgGrade(data) {
         );
     }
 
-    let response = [
+    return [
         {
-            id: "grade",
+            id: "평균 학점",
             color: "hsl(37, 70%, 50%)",
             data: semester.reverse()
         }
-    ]
-
-    return response;
+    ];
 }
+
+export function parseMGPA(data) {
+    let semester = [];
+    let mgpaList = [];
+
+    for (let item in data) {
+        let mgp = 0.0, mcount = 0;
+        let subjectList = [];
+        for (let subject in data[item]["subject"]) {
+            if (data[item]["subject"][subject].classification === "전필" || data[item]["subject"][subject].classification === "전선" || data[item]["subject"][subject].classification === "전기") {
+                mgp += gradeWeight[data[item]["subject"][subject].grade];
+                mcount++;
+                subjectList.push(data[item]["subject"][subject]);
+            }
+        }
+
+        mgpaList.push(
+            {
+                semester: data[item]["semester"],
+                mgpa: mgp / mcount,
+                subject: subjectList
+            }
+        )
+    }
+    console.log(mgpaList);
+
+
+    for (let item in mgpaList) {
+        semester.push(
+            {
+                x: mgpaList[item].semester,
+                y: mgpaList[item].mgpa,
+                subject: mgpaList[item].subject
+            }
+        );
+    }
+
+    return [
+        {
+            id: "전공 평균 학점",
+            color: "hsl(37, 70%, 50%)",
+            data: semester.reverse()
+        }
+    ];
+}
+
+export const gradeWeight = {
+    "A+": 4.5,
+    "A0": 4.0,
+    "B+": 3.5,
+    "B0": 3.0,
+    "C+": 2.5,
+    "C0": 2.0,
+    "D+": 1.5,
+    "D0": 1.0,
+    "F0": 0.0,
+    "P": 0.2,
+    "N": 0.1
+};

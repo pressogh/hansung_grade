@@ -1,27 +1,13 @@
 import { Card, Text } from '@nextui-org/react';
 import { ResponsiveLine } from '@nivo/line'
-import { BasicTooltip } from '@nivo/tooltip';
-import { parseAvgGrade } from "../utils/util";
+import { parseGPA } from "../utils/util";
+import { gradeWeight } from "../utils/util";
 
-export default function GradeGraph({ data }) {
-    const weight = {
-        "A+": 4.5,
-        "A0": 4.0,
-        "B+": 3.5,
-        "B0": 3.0,
-        "C+": 2.5,
-        "C0": 2.0,
-        "D+": 1.5,
-        "D0": 1.0,
-        "F0": 0.0,
-        "P": 0.2,
-        "N": 0.1
-    };
-
+export default function GPAGraph({ data }) {
     return (
         <>
             <ResponsiveLine
-                data={parseAvgGrade(data)}
+                data={parseGPA(data)}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: 'point' }}
                 yScale={{
@@ -68,7 +54,7 @@ export default function GradeGraph({ data }) {
                 tooltip={(input) => {
                     let lst = input.point.data.subject.slice();
                     lst.sort((a, b) => {
-                        if (weight[a.grade] < weight[b.grade]) return 1;
+                        if (gradeWeight[a.grade] < gradeWeight[b.grade]) return 1;
                         else return -1;
                     })
 
@@ -123,4 +109,4 @@ export default function GradeGraph({ data }) {
             `}</style>
         </>
     )
-};
+}
