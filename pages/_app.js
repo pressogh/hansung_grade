@@ -1,5 +1,5 @@
 import { NextUIProvider } from "@nextui-org/react";
-import { RecoilRoot, atom, selector, useRecoilState, useValue } from "recoil";
+import { RecoilRoot } from "recoil";
 import Layout from "../layouts/Layout";
 
 export default function App({ Component, pageProps }) {
@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
 
 				<style jsx>{`
 					.container {
-						margin: 0 10% 0 10%;
+						margin: 0 10vw 0 10vw;
 					}
 				`}</style>
 			</NextUIProvider>

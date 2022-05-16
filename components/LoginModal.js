@@ -11,7 +11,7 @@ import { gradeData, username, password } from '../utils/states';
 export default function LoginModal({ visible, closeHandler }) {
     const [id, setId] = useRecoilState(username);
     const [passwd, setPassword] = useRecoilState(password);
-    const [rememberme, setRememberme] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
     const [grade, setGradeData] = useRecoilState(gradeData);
 
     const handleIdChange = (e) => {
@@ -25,7 +25,7 @@ export default function LoginModal({ visible, closeHandler }) {
     const handleLoginButtonClick = async () => {
         closeHandler();
         setGradeData("loading");
-        setGradeData(await getGrade(id, passwd, rememberme));
+        setGradeData(await getGrade(id, passwd, rememberMe));
     }
 
     return (
@@ -66,7 +66,7 @@ export default function LoginModal({ visible, closeHandler }) {
                     value={passwd}
                 />
                 <Row justify="space-between">
-                    <Checkbox isSelected={rememberme} onChange={setRememberme} >
+                    <Checkbox isSelected={rememberMe} onChange={setRememberMe} >
                         <Text size={14}>로그인 유지</Text>
                     </Checkbox>
                 </Row>
