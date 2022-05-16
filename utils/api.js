@@ -1,4 +1,5 @@
 import React from 'react';
+import {ApiError} from "next/dist/server/api-utils";
 
 export const getGrade = async (username, password, rememberMe) => {
     const data = {
@@ -24,6 +25,8 @@ export const getGrade = async (username, password, rememberMe) => {
         .catch((error) => {
             console.log("[Error] ", error);
         })
+
+    if (!res) throw new ApiError(500, "서버 응답 없음")
 
     if (rememberMe === true) {
         localStorage.setItem("username", username);

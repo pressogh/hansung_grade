@@ -1,14 +1,14 @@
-// TODO: 전공평점 기능 추가
 import { Card, Text } from '@nextui-org/react';
 import { ResponsiveLine } from '@nivo/line'
-import { parseMGPA } from "../utils/util";
-import { gradeWeight } from "../utils/util";
+import { parseGPA } from "../../utils/util";
+import { gradeWeight } from "../../utils/util";
+import {Tooltip} from "./Tooltip";
 
-export default function MGPAGraph({ data }) {
+export default function GPAGraph({ data }) {
     return (
         <>
             <ResponsiveLine
-                data={parseMGPA(data)}
+                data={parseGPA(data)}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: 'point' }}
                 yScale={{
@@ -53,33 +53,8 @@ export default function MGPAGraph({ data }) {
                     }
                 ]}
                 tooltip={(input) => {
-                    let lst = input.point.data.subject.slice();
-                    lst.sort((a, b) => {
-                        if (gradeWeight[a.grade] < gradeWeight[b.grade]) return 1;
-                        else return -1;
-                    })
-
                     return (
-                        <Card className="tooltip-container">
-                            <div className='tooltip-item title'>
-                                <Text weight={"bold"}>전공평균평점</Text>
-                                <Text>{input.point.data.y}</Text>
-                            </div>
-                            {
-                                lst.map((item) => {
-                                    return (
-                                        <div key={item.name} className="tooltip-item">
-                                            <div className='tooltip-name'>
-                                                {item.name}
-                                            </div>
-                                            <div className='tooltip-grade'>
-                                                {item.grade}
-                                            </div>
-                                        </div>
-                                    );
-                                })
-                            }
-                        </Card>
+                        <Tooltip data={input} />
                     )}
                 }
             />

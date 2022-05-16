@@ -5,8 +5,8 @@ import Title from "../components/Title";
 import { useRecoilState } from "recoil";
 import { gradeData } from "../utils/states";
 import { getGrade } from "../utils/api";
-import MGPAGraph from "../components/MGPAGraph";
-import GPAGraph from "../components/GPAGraph";
+import MGPAGraph from "../components/Graph/MGPAGraph";
+import GPAGraph from "../components/Graph/GPAGraph";
 
 export default function Home() {
     const [grade, setGradeData] = useRecoilState(gradeData);
@@ -29,31 +29,34 @@ export default function Home() {
         <div className="container">
             <Title title="한움" />
 
-            {/*<Card css={{ "width": "50vw", "margin-top": "10vw" }} >*/}
-            {/*    <div className="chart">*/}
-            {/*        {*/}
-            {/*            grade === "loading" || grade === "" ?*/}
-            {/*                <Loading size="xl" />*/}
-            {/*                :*/}
-            {/*                <MGPAGraph data={grade} />*/}
-            {/*        }*/}
-            {/*    </div>*/}
-            {/*</Card>*/}
+            <Card css={{ "width": "80vw", "margin-top": "10vh" }} >
+                <div className="chart">
+                    {
+                        grade === "loading" || grade === "" ?
+                            <Loading size="xl" />
+                            :
+                            <GPAGraph data={grade} />
+                    }
+                </div>
+            </Card>
 
-            <div className="chart">
-                {
-                    grade === "loading" || grade === "" ?
-                        <Loading size="xl" />
-                        :
-                        <MGPAGraph data={grade} />
-                }
-            </div>
+            <Card css={{ "width": "80vw", "margin-top": "5vh" }} >
+                <div className="chart">
+                    {
+                        grade === "loading" || grade === "" ?
+                            <Loading size="xl" />
+                            :
+                            <MGPAGraph data={grade} />
+                    }
+                </div>
+            </Card>
 
             <style jsx>{`
                 .container {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    flex-direction: column;
                 }
                 .chart {
                     display: flex;
@@ -61,9 +64,6 @@ export default function Home() {
                     align-items: center;
                     height: 50vh;
                     background: white;
-                    
-                    width: 80vw;
-                    margin-top: 15vh;
                 }
             `}</style>
         </div>
