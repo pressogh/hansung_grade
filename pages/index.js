@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Card, Loading } from "@nextui-org/react";
+import { Loading } from "@nextui-org/react";
 import Title from "../components/Title";
 
 import { useRecoilState } from "recoil";
-import { gradeData } from "../utils/states";
-import { getGrade } from "../utils/api";
-import MGPAGraph from "../components/MGPAGraph";
-import GPAGraph from "../components/GPAGraph";
+import { gradeData } from "../utils/States";
+import { getGrade } from "../utils/Api";
+import LineGraph from "../components/Graph/LineGraph";
+import RandomGraph from "../components/Graph/RandomGraph";
 
 export default function Home() {
     const [grade, setGradeData] = useRecoilState(gradeData);
@@ -29,23 +29,11 @@ export default function Home() {
         <div className="container">
             <Title title="한움" />
 
-            {/*<Card css={{ "width": "50vw", "margin-top": "10vw" }} >*/}
-            {/*    <div className="chart">*/}
-            {/*        {*/}
-            {/*            grade === "loading" || grade === "" ?*/}
-            {/*                <Loading size="xl" />*/}
-            {/*                :*/}
-            {/*                <MGPAGraph data={grade} />*/}
-            {/*        }*/}
-            {/*    </div>*/}
-            {/*</Card>*/}
-
             <div className="chart">
                 {
-                    grade === "loading" || grade === "" ?
-                        <Loading size="xl" />
-                        :
-                        <MGPAGraph data={grade} />
+                    grade === "" ?
+                        <RandomGraph /> : grade === "loading" ?
+                            <Loading size="xl" /> : <LineGraph data={grade} type={"BothGPA"} />
                 }
             </div>
 
@@ -54,16 +42,19 @@ export default function Home() {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    flex-direction: column;
                 }
                 .chart {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    width: 80vw;
                     height: 50vh;
                     background: white;
-                    
-                    width: 80vw;
                     margin-top: 15vh;
+                    padding: 1vw;
+                    border-radius: 3vmin;
+                    box-shadow: 0 10px 50px -3px rgba(0,0,0,0.1);
                 }
             `}</style>
         </div>
