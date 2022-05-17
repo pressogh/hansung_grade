@@ -1,3 +1,19 @@
+import { useEffect, useRef } from "react";
+
+export const gradeWeight = {
+    "A+": 4.5,
+    "A0": 4.0,
+    "B+": 3.5,
+    "B0": 3.0,
+    "C+": 2.5,
+    "C0": 2.0,
+    "D+": 1.5,
+    "D0": 1.0,
+    "F0": 0.0,
+    "P": 0.2,
+    "N": 0.1
+};
+
 export function parseGPA(data) {
     let semester = [];
 
@@ -43,8 +59,6 @@ export function parseMGPA(data) {
             }
         )
     }
-    console.log(mgpaList);
-
 
     for (let item in mgpaList) {
         semester.push(
@@ -65,16 +79,40 @@ export function parseMGPA(data) {
     ];
 }
 
-export const gradeWeight = {
-    "A+": 4.5,
-    "A0": 4.0,
-    "B+": 3.5,
-    "B0": 3.0,
-    "C+": 2.5,
-    "C0": 2.0,
-    "D+": 1.5,
-    "D0": 1.0,
-    "F0": 0.0,
-    "P": 0.2,
-    "N": 0.1
-};
+export const randomData = () => {
+    const res = [];
+
+    for (let i = 0; i < 4; i++) {
+        res.push(
+            {
+                x: i.toString(),
+                y: (Math.round((Math.random() * (4.5 - 3) + 3) * 100) / 100).toString()
+            }
+        );
+    }
+
+    return [
+        {
+            id: "평균 학점",
+            data: res
+        }
+    ];
+}
+
+export const useInterval = (callback, delay) => {
+    const savedCallback = useRef();
+
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        function tick() {
+            savedCallback.current();
+        }
+        if (delay !== null) {
+            let id = setInterval(tick, delay);
+            return () => clearInterval(id);
+        }
+    }, [delay]);
+}

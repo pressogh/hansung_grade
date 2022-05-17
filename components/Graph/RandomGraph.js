@@ -1,12 +1,18 @@
 import { ResponsiveLine } from '@nivo/line'
-import { parseMGPA } from "../../utils/util";
-import { Tooltip } from "./Tooltip";
+import {randomData, useInterval} from "../../utils/util";
+import {  useState } from "react";
 
-export default function MGPAGraph({ data }) {
+export default function RandomGraph() {
+    const [randomGrade, setRandomGrade] = useState([]);
+
+    useInterval(() => {
+        setRandomGrade(randomData());
+    }, [1000]);
+
     return (
         <>
             <ResponsiveLine
-                data={parseMGPA(data)}
+                data={randomGrade}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: 'point' }}
                 yScale={{
@@ -50,37 +56,7 @@ export default function MGPAGraph({ data }) {
                         ]
                     }
                 ]}
-                tooltip={(input) => {
-                    return (
-                        <Tooltip data={input} />
-                    )}
-                }
             />
-
-            <style jsx>{`
-                .tooltip-container {
-                    padding: 10px;
-                    border: 1px solid black;
-                }
-
-                .title {
-                    margin-bottom: 1vh;
-                }
-
-                .tooltip-item {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                }
-
-                .tooltip-name {
-                    margin-right: 1vw;
-                }
-                
-                .tooltip-grade {
-                    margin-left: 1vw;
-                }
-            `}</style>
         </>
     )
 }

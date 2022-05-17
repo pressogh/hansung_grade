@@ -1,5 +1,5 @@
 import React from 'react';
-import {ApiError} from "next/dist/server/api-utils";
+import { ApiError } from "next/dist/server/api-utils";
 
 export const getGrade = async (username, password, rememberMe) => {
     const data = {

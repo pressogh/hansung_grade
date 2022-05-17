@@ -11,7 +11,7 @@ export const Tooltip = ({ data }) => {
     return (
         <Card className="tooltip-container">
             <div className='tooltip-item title'>
-                <Text weight={"bold"}>전공평균평점</Text>
+                <Text weight={"bold"}>{ data.point.serieId }</Text>
                 <Text>{data.point.data.y}</Text>
             </div>
             {
@@ -19,15 +19,38 @@ export const Tooltip = ({ data }) => {
                     return (
                         <div key={item.name} className="tooltip-item">
                             <div className='tooltip-name'>
-                                {item.name}
+                                { item.name }
                             </div>
                             <div className='tooltip-grade'>
-                                {item.grade}
+                                { item.grade }
                             </div>
                         </div>
                     );
                 })
             }
+
+            <style jsx>{`
+                .tooltip-container {
+                }
+
+                .title {
+                    margin-bottom: 1vh;
+                }
+
+                .tooltip-item {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+
+                .tooltip-name {
+                    margin-right: 1vw;
+                }
+                
+                .tooltip-grade {
+                    margin-left: 1vw;
+                }
+            `}</style>
         </Card>
     )
 }
