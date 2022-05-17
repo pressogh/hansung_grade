@@ -1,24 +1,33 @@
 import { ResponsiveLine } from '@nivo/line'
-import {randomData, useInterval} from "../../utils/util";
-import {  useState } from "react";
+import { randomData } from "../../utils/Util";
+import { useInterval } from "../../hooks/Hooks";
+import {useEffect, useState} from "react";
+import {Loading} from "@nextui-org/react";
 
 export default function RandomGraph() {
-    const [randomGrade, setRandomGrade] = useState([]);
+    const [randomGrade, setRandomGrade] = useState(0);
 
     useInterval(() => {
-        setRandomGrade(randomData());
-    }, [1000]);
+        setRandomGrade(randomGrade + 1);
+    }, [1500]);
 
+    useEffect(() => {
+        setRandomGrade(randomGrade + 1);
+    }, [])
+
+    useEffect(()=>{},[randomGrade]);
+
+    if (!randomGrade) return <Loading size="xl" />
     return (
         <>
             <ResponsiveLine
-                data={randomGrade}
+                data={randomData()}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: 'point' }}
                 yScale={{
                     type: 'linear',
-                    min: 'auto',
-                    max: 'auto',
+                    min: '3.5',
+                    max: '4.5',
                     stacked: true,
                     reverse: false
                 }}
@@ -29,7 +38,6 @@ export default function RandomGraph() {
                 pointBorderWidth={2}
                 pointBorderColor={{ from: 'serieColor' }}
                 pointLabelYOffset={-12}
-                useMesh={true}
                 legends={[
                     {
                         anchor: 'bottom-right',
@@ -56,6 +64,7 @@ export default function RandomGraph() {
                         ]
                     }
                 ]}
+                tooltip={()=>{}}
             />
         </>
     )

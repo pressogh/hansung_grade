@@ -1,5 +1,5 @@
 import { ResponsiveLine } from '@nivo/line'
-import { parseGPA, parseMGPA } from "../../utils/util";
+import { parseGPA, parseMGPA } from "../../utils/Util";
 import {Tooltip} from "./Tooltip";
 import {useEffect, useState} from "react";
 

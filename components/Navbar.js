@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Text } from "@nextui-org/react";
 
 import { useRecoilState } from 'recoil';
-import { gradeData } from '../utils/states';
+import { gradeData } from '../utils/States';
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);

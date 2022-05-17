@@ -3,8 +3,8 @@ import { Loading } from "@nextui-org/react";
 import Title from "../components/Title";
 
 import { useRecoilState } from "recoil";
-import { gradeData } from "../utils/states";
-import { getGrade } from "../utils/api";
+import { gradeData } from "../utils/States";
+import { getGrade } from "../utils/Api";
 import LineGraph from "../components/Graph/LineGraph";
 import RandomGraph from "../components/Graph/RandomGraph";
 
@@ -31,9 +31,9 @@ export default function Home() {
 
             <div className="chart">
                 {
-                    // TODO: Change Loading to RandomGraph
-                    grade === "loading" || grade === "" ?
-                        <Loading /> : <LineGraph data={grade} type={"BothGPA"} />
+                    grade === "" ?
+                        <RandomGraph /> : grade === "loading" ?
+                            <Loading size="xl" /> : <LineGraph data={grade} type={"BothGPA"} />
                 }
             </div>
 

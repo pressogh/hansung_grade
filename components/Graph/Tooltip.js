@@ -1,5 +1,5 @@
 import {Card, Text} from "@nextui-org/react";
-import {gradeWeight} from "../../utils/util";
+import {gradeWeight} from "../../utils/Util";
 
 export const Tooltip = ({ data }) => {
     let lst = data.point.data.subject.slice();

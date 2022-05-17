@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 export const gradeWeight = {
     "A+": 4.5,
     "A0": 4.0,
@@ -86,7 +84,7 @@ export const randomData = () => {
         res.push(
             {
                 x: i.toString(),
-                y: (Math.round((Math.random() * (4.5 - 3) + 3) * 100) / 100).toString()
+                y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
             }
         );
     }
@@ -97,22 +95,4 @@ export const randomData = () => {
             data: res
         }
     ];
-}
-
-export const useInterval = (callback, delay) => {
-    const savedCallback = useRef();
-
-    useEffect(() => {
-        savedCallback.current = callback;
-    }, [callback]);
-
-    useEffect(() => {
-        function tick() {
-            savedCallback.current();
-        }
-        if (delay !== null) {
-            let id = setInterval(tick, delay);
-            return () => clearInterval(id);
-        }
-    }, [delay]);
 }
