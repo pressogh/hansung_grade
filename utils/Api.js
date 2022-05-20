@@ -18,7 +18,7 @@ export const getGrade = async (username, password, rememberMe) => {
       redirect: 'follow',
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/grade`, requestOptions)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/grade`, requestOptions)
         .then((response) => {
             return response.json();
         })

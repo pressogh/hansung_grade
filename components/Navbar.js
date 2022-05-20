@@ -44,7 +44,7 @@ export default function Navbar() {
                         {
                             grade ? null 
                                 :
-                            <Button auto color="warning" shadow onClick={handler}>
+                            <Button auto color="primary" shadow onClick={handler}>
                                 로그인
                             </Button> 
                         }
