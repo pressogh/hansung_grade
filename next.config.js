@@ -13,7 +13,9 @@ intercept(interceptStdout)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // To Fix Nextjs Runs useEffect Twice
+  // https://github.com/vercel/next.js/issues/35957
+  reactStrictMode: false, // default => true
 }
 
 module.exports = nextConfig
