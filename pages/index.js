@@ -17,7 +17,6 @@ export default function Home() {
             const password = localStorage.getItem("password");
 
             if (username !== null && password !== null) {
-                console.log("Getting grade data");
                 getGrade(username, password)
                     .then((data) => {
                         setGradeData(data);
@@ -39,16 +38,6 @@ export default function Home() {
                     }
                 </div>
             </div>
-            <div className="chart">
-                <div className="chart-border">
-                    {
-                        grade === "" ?
-                            <RandomGraph /> : grade === "loading" ?
-                                <Loading size="xl" /> : <LineGraph data={grade} type={"BothGPA"} />
-                    }
-                </div>
-            </div>
-
 
             <style jsx>{`
                 .container {
@@ -66,15 +55,26 @@ export default function Home() {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 40vw;
+                    width: 50vw;
                     height: 40vh;
                     background: white;
                     padding: 1vw;
                     border-radius: 3vmin;
                     box-shadow: 0 10px 50px -3px rgba(0,0,0,0.1);
                 }
-                .chart-title {
-                    //padding-right: 10vw;
+                .menu-border {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 15vw;
+                    height: 40vh;
+                    background: white;
+                    padding: 1vw;
+                    border-radius: 3vmin;
+                    box-shadow: 0 10px 50px -3px rgba(0,0,0,0.1);
+                }
+                .menu-padding {
+                    padding-right: 10vw;
                 }
             `}</style>
         </div>

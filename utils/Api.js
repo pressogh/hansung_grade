@@ -23,21 +23,15 @@ export const getGrade = async (username, password, rememberMe) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/grade`, requestOptions)
         .then((response) => {
             if (!response.ok) {
-                if (ErrorMessage[response.status]) toast.error(`[${response.status}] ${ErrorMessage[response.status]}`, {
-                    theme: "colored"
-                });
-                else toast.error(`[${response.status}] ${response.statusText}`, {
-                    theme: "colored"
-                });
+                if (ErrorMessage[response.status]) toast.error(`[${response.status}] ${ErrorMessage[response.status]}`);
+                else toast.error(`[${response.status}] ${response.statusText}`);
                 return "";
             } else {
                 return response.json();
             }
         })
         .catch((error) => {
-            toast.error(`[500] ${ErrorMessage["500"]}`, {
-                theme: "colored"
-            });
+            toast.error(`[500] ${ErrorMessage["500"]}`);
             return "";
         })
 
@@ -70,21 +64,15 @@ export const getInfo = async (username, password, rememberMe) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/info`, requestOptions)
         .then((response) => {
             if (!response.ok) {
-                if (ErrorMessage[response.status]) toast.error(`[${response.status}] ${ErrorMessage[response.status]}`, {
-                    theme: "colored"
-                });
-                else toast.error(`[${response.status}] ${response.statusText}`, {
-                    theme: "colored"
-                });
+                if (ErrorMessage[response.status]) toast.error(`[${response.status}] ${ErrorMessage[response.status]}`);
+                else toast.error(`[${response.status}] ${response.statusText}`);
                 return "";
             } else {
                 return response.json();
             }
         })
         .catch((error) => {
-            toast.error(`[500] ${ErrorMessage["500"]}`, {
-                theme: "colored"
-            });
+            toast.error(`[500] ${ErrorMessage["500"]}`);
             return "";
         })
 
@@ -92,6 +80,8 @@ export const getInfo = async (username, password, rememberMe) => {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
     }
+
+    if (res) toast.success("로그인 성공", { theme: "colored" });
 
     return res;
 }

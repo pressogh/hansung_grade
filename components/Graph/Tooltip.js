@@ -35,6 +35,7 @@ export const Tooltip = ({ data }) => {
 
                 .title {
                     margin-bottom: 1vh;
+                    border-bottom: 1px solid rgba(219, 219, 219, 1);
                 }
 
                 .tooltip-item {

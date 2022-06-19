@@ -15,4 +15,9 @@ const gradeData = atom({
     default: '',
 });
 
-export { gradeData, username, password };
+const infoData = atom({
+    key: "infoData",
+    default: '',
+})
+
+export { username, password, gradeData, infoData };
