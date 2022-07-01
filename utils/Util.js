@@ -12,6 +12,7 @@ export const gradeWeight = {
     "N": 0.1
 };
 
+// 평균 학점
 export function parseGPA(data) {
     let semester = [];
 
@@ -34,6 +35,7 @@ export function parseGPA(data) {
     ];
 }
 
+// 전공 평균 학점
 export function parseMGPA(data) {
     let semester = [];
     let mgpaList = [];
@@ -52,7 +54,7 @@ export function parseMGPA(data) {
         mgpaList.push(
             {
                 semester: data[item]["semester"],
-                mgpa: mgp / mcount,
+                mgpa: Math.round(mgp / mcount * 100) / 100,
                 subject: subjectList
             }
         )
