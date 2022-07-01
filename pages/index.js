@@ -29,7 +29,21 @@ export default function Home() {
                     });
             }
         }
-    }, [grade, nowGrade]);
+    }, [grade]);
+
+    useEffect(() => {
+        if (!nowGrade) {
+            const username = localStorage.getItem("username");
+            const password = localStorage.getItem("password");
+
+            if (username !== null && password !== null) {
+                getNowGrade(username, password)
+                    .then((data) => {
+                        setNowGrade(data);
+                    });
+            }
+        }
+    }, [nowGrade]);
 
     const sortBySemester = (data) => {
         data.sort((a, b) => {
