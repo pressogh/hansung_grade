@@ -54,10 +54,10 @@ export default function Home() {
         <div className="container">
             <Title title="한움" />
 
-            <div className="title-container">
-                <div>한성대학교 학생들을 위한 성적 시각화 사이트</div>
-                <div>한움</div>
-            </div>
+            {/*<div className="title-container">*/}
+            {/*    <div>한성대학교 학생들을 위한 성적 시각화 사이트</div>*/}
+            {/*    <div>한움</div>*/}
+            {/*</div>*/}
 
             <div className="content-container">
                 {/*<LeftMemu contentType={contentType} setContentType={setContentType} />*/}
@@ -96,14 +96,14 @@ export default function Home() {
                     display: flex;
                     justify-items: center;
                     align-items: center;
-                    margin-top: 15vh;
+                    margin-top: 10vh;
                 }
                 .chart-border {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 60vw;
-                    height: 50vh;
+                    width: 80vw;
+                    height: 65vh;
                     background: white;
                     padding: 1vw;
                     border-radius: 3vmin;
