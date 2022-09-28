@@ -63,6 +63,9 @@ export default function Home() {
                 {/*<LeftMemu contentType={contentType} setContentType={setContentType} />*/}
 
                 <div className="chart">
+                    <div className="chart-title">
+                        학점
+                    </div>
                     <div className="chart-border">
                         {
                             (grade === "" && nowGrade === "") ?
@@ -94,16 +97,22 @@ export default function Home() {
                 }
                 .chart {
                     display: flex;
+                    flex-direction: column;
                     justify-items: center;
-                    align-items: center;
-                    margin-top: 10vh;
+                    margin-top: 5vh;
+                }
+                .chart-title {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                    margin-bottom: 2vh;
+                    margin-left: 2vw;
                 }
                 .chart-border {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     width: 80vw;
-                    height: 65vh;
+                    height: 65vmin;
                     background: white;
                     padding: 1vw;
                     border-radius: 3vmin;
