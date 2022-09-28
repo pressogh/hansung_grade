@@ -82,10 +82,13 @@ export function parseMGPA(data) {
 export const randomData = () => {
     const res = [];
 
-    for (let i = 0; i < 4; i++) {
+    const now = new Date();
+    for (let i = 0; i < 6; i++) {
+        now.setDate(now.getDate() - 182);
+
         res.push(
             {
-                x: i.toString(),
+                x: now.getFullYear() + "학년도" + (now.getMonth() > 6 ? " 2학기" : " 1학기"),
                 y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
             }
         );
@@ -94,7 +97,7 @@ export const randomData = () => {
     return [
         {
             id: "평균 학점",
-            data: res
+            data: res.reverse()
         }
     ];
 }
