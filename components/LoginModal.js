@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
 import { Password } from "./icons/Password";
 import { StudentNumber } from "./icons/StudentNumber";
-import { getGrade } from "../utils/Api";
+import { getGrade, getInfo } from "../utils/Api";
 
 import { useRecoilState } from 'recoil';
-import { gradeData, username, password } from '../utils/States';
+import { gradeData, username, password, infoData } from "../utils/States";
 
 
 export default function LoginModal({ visible, closeHandler }) {
     const [id, setId] = useRecoilState(username);
     const [passwd, setPassword] = useRecoilState(password);
-    const [rememberMe, setRememberMe] = useState(false);
     const [grade, setGradeData] = useRecoilState(gradeData);
+    const [info, setInfoData] = useRecoilState(infoData);
+
+    const [rememberMe, setRememberMe] = useState(false);
 
     const handleIdChange = (e) => {
         setId(e.target.value);
@@ -26,6 +28,7 @@ export default function LoginModal({ visible, closeHandler }) {
         closeHandler();
         setGradeData("loading");
         setGradeData(await getGrade(id, passwd, rememberMe));
+        setInfoData(await getInfo(id, passwd));
     }
 
     return (

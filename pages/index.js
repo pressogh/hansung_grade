@@ -24,10 +24,6 @@ export default function Home() {
                     .then((data) => {
                         setGrade(data);
                     });
-                getNowGrade(username, password)
-                    .then((data) => {
-                        setNowGrade(data);
-                    });
             }
         }
     }, [grade]);
@@ -58,18 +54,21 @@ export default function Home() {
         <div className="container">
             <Title title="한움" />
 
-            <div>
-                <LeftMemu contentType={contentType} setContentType={setContentType} />
+            <div className="title-container">
+                <div>한성대학교 학생들을 위한 성적 시각화 사이트</div>
+                <div>한움</div>
             </div>
 
-            <div>
+            <div className="content-container">
+                {/*<LeftMemu contentType={contentType} setContentType={setContentType} />*/}
+
                 <div className="chart">
                     <div className="chart-border">
                         {
-                            (grade === "" || nowGrade === "") ?
+                            (grade === "" && nowGrade === "") ?
                                 <RandomGraph /> : (grade === "loading" || nowGrade === "loading") ?
                                     <Loading size="xl" /> :
-                                    <LineGraph data={sortBySemester([nowGrade, ...grade])} type={"BothGPA"} />
+                                    <LineGraph data={sortBySemester(nowGrade !== "" ? [nowGrade, ...grade] : [...grade])} type={"BothGPA"} />
                         }
                     </div>
                 </div>
@@ -77,6 +76,14 @@ export default function Home() {
 
             <style jsx>{`
                 .container {
+                }
+                .title-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .content-container {
                     display: flex;
                     flex-direction: row;
                     justify-content: center;

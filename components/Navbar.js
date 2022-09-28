@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
-import { Button, Text } from "@nextui-org/react";
+import { Button, Text, User } from "@nextui-org/react";
 import LoginModal from "../components/LoginModal";
 import Link from "next/link";
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from "recoil";
 import { infoData } from '../utils/States';
 import {getInfo} from "../utils/Api";
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);
-    const [info, setInfoData] = useRecoilState(infoData);
+    const info = useRecoilValue(infoData);
 
     const handler = () => {
         setVisible(true);
@@ -19,21 +19,6 @@ export default function Navbar() {
     const closeHandler = () => {
         setVisible(false);
     }
-
-    useEffect(() => {
-        if (!info) {
-            const username = localStorage.getItem("username");
-            const password = localStorage.getItem("password");
-
-            if (username !== null && password !== null) {
-                getInfo(username, password)
-                    .then((data) => {
-                        setInfoData(data);
-                        console.log(data);
-                    });
-            }
-        }
-    }, [info]);
 
     return (
         <nav className="navbar">
@@ -59,7 +44,10 @@ export default function Navbar() {
                     <div className="gnb-menu-right">
                         {
                             info ? <div className="info-text">
-                                <Text h2>{ info.name }</Text>
+                                <User
+                                    name={info.name}
+                                    squared
+                                />
                             </div>
                                 :
                             <Button auto color="primary" shadow onClick={handler}>

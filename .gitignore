@@ -34,3 +34,5 @@ data.json
 .idea
 
 dev
+yarn.lock
+package-lock.json
