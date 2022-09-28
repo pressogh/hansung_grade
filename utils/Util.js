@@ -54,7 +54,7 @@ export function parseMGPA(data) {
         mgpaList.push(
             {
                 semester: data[item]["semester"],
-                mgpa: Math.round(mgp / mcount * 100) / 100,
+                mgpa: mgp === 0 ? 0 : Math.floor(mgp / mcount * 100) / 100,
                 subject: subjectList
             }
         )

@@ -68,7 +68,10 @@ export default function Home() {
                             (grade === "" && nowGrade === "") ?
                                 <RandomGraph /> : (grade === "loading" || nowGrade === "loading") ?
                                     <Loading size="xl" /> :
-                                    <LineGraph data={sortBySemester(nowGrade !== "" ? [nowGrade, ...grade] : [...grade])} type={"BothGPA"} />
+                                    <LineGraph
+                                        data={sortBySemester(nowGrade !== "" ? [nowGrade, ...grade] : [...grade])}
+                                        type={"BothGPA"}
+                                    />
                         }
                     </div>
                 </div>

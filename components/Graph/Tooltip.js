@@ -42,6 +42,7 @@ export const Tooltip = ({ data }) => {
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
+                        min-width: 10vw;
                     }
     
                     .tooltip-name {
