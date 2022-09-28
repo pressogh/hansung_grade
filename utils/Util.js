@@ -17,13 +17,26 @@ export function parseGPA(data) {
     let semester = [];
 
     for (let item in data) {
-        semester.push(
-            {
-                x: data[item]["semester"],
-                y: data[item]["average_credits"],
-                subject: data[item]["subject"]
-            }
-        );
+        const year = data[item]["semester"].split("학년도")[0];
+        const semesterNum = data[item]["semester"].split("학년도")[1].split("학기")[0];
+
+        if (window.innerWidth > 775) {
+            semester.push(
+                {
+                    x: year + "학년도 " + semesterNum + "학기",
+                    y: data[item]["average_credits"],
+                    subject: data[item]["subject"]
+                }
+            );
+        } else {
+            semester.push(
+                {
+                    x: year + "." + semesterNum + ".",
+                    y: data[item]["average_credits"],
+                    subject: data[item]["subject"]
+                }
+            );
+        }
     }
 
     return [
@@ -61,13 +74,26 @@ export function parseMGPA(data) {
     }
 
     for (let item in mgpaList) {
-        semester.push(
-            {
-                x: mgpaList[item].semester,
-                y: mgpaList[item].mgpa,
-                subject: mgpaList[item].subject
-            }
-        );
+        const year = mgpaList[item]["semester"].split("학년도")[0];
+        const semesterNum = mgpaList[item]["semester"].split("학년도")[1].split("학기")[0];
+
+        if (window.innerWidth > 775) {
+            semester.push(
+                {
+                    x: year + "학년도 " + semesterNum + "학기",
+                    y: mgpaList[item].mgpa,
+                    subject: mgpaList[item].subject
+                }
+            );
+        } else {
+            semester.push(
+                {
+                    x: year + "." + semesterNum + ".",
+                    y: mgpaList[item].mgpa,
+                    subject: mgpaList[item].subject
+                }
+            );
+        }
     }
 
     return [
@@ -86,12 +112,22 @@ export const randomData = () => {
     for (let i = 0; i < 6; i++) {
         now.setDate(now.getDate() - 182);
 
-        res.push(
-            {
-                x: now.getFullYear() + "학년도" + (now.getMonth() > 6 ? " 2학기" : " 1학기"),
-                y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
-            }
-        );
+        // vw가 775px 이하라면
+        if (window.innerWidth > 775) {
+            res.push(
+                {
+                    x: now.getFullYear() + "학년도" + (now.getMonth() > 6 ? " 2학기" : " 1학기"),
+                    y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
+                }
+            );
+        } else {
+            res.push(
+                {
+                    x: now.getFullYear() + "." + (now.getMonth() > 6 ? " 2." : " 1."),
+                    y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
+                }
+            );
+        }
     }
 
     return [

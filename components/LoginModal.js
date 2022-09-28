@@ -53,7 +53,6 @@ export default function LoginModal({ visible, closeHandler }) {
             </Modal.Header>
             <Modal.Body>
                 <Input
-                    clearable
                     bordered
                     fullWidth
                     color="primary"
