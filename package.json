@@ -9,19 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@nextui-org/react": "^1.0.0-beta.6",
+    "@nextui-org/react": "^1.0.0-beta.10",
     "@nivo/core": "^0.79.0",
     "@nivo/line": "^0.79.1",
     "@nivo/tooltip": "^0.79.0",
+    "@react-buddy/ide-toolbox": "^2.1.2",
     "axios": "^0.27.2",
     "intercept-stdout": "^0.1.2",
     "next": "12.1.6",
+    "prop-types": "^15.8.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "recoil": "^0.7.2"
+    "react-toastify": "^9.0.2",
+    "recoil": "^0.7.5"
   },
-  "devDependencies": {
-    "eslint": "8.14.0",
-    "eslint-config-next": "12.1.6"
-  }
+  "devDependencies": {}
 }

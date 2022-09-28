@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
+import React, {useEffect, useState} from "react";
+import Image from "next/image";
+import { Button, Text, User } from "@nextui-org/react";
 import LoginModal from "../components/LoginModal";
 import Link from "next/link";
-import { Text } from "@nextui-org/react";
 
-import { useRecoilState } from 'recoil';
-import { gradeData } from '../utils/States';
+import { useRecoilState, useRecoilValue } from "recoil";
+import { infoData } from '../utils/States';
+import {getInfo} from "../utils/Api";
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);
-    const [grade, setGradeData] = useRecoilState(gradeData);
+    const info = useRecoilValue(infoData);
 
     const handler = () => {
         setVisible(true);
@@ -42,9 +43,14 @@ export default function Navbar() {
                 <div className="gnb-wrap">
                     <div className="gnb-menu-right">
                         {
-                            grade ? null 
+                            info ? <div className="info-text">
+                                <User
+                                    name={info.name}
+                                    squared
+                                />
+                            </div>
                                 :
-                            <Button auto color="warning" shadow onClick={handler}>
+                            <Button auto color="primary" shadow onClick={handler}>
                                 로그인
                             </Button> 
                         }
@@ -70,7 +76,7 @@ export default function Navbar() {
 
                 .gnb-wrap {
                     display: flex;
-                    align-self: end;
+                    align-self: center;
                 }
 
                 .gnb-menu-right {
@@ -79,6 +85,11 @@ export default function Navbar() {
 
                 .gnb-menu-left {
                     margin-left: 10vw;
+                }
+                
+                .info-text {
+                    display: flex;
+                    flex-direction: row;
                 }
             `}</style>
         </nav>
