@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { infoData } from '../utils/States';
 import {getInfo} from "../utils/Api";
+import { SmoothCorners } from "react-smooth-corners";
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);
@@ -43,11 +44,25 @@ export default function Navbar() {
                 <div className="gnb-wrap">
                     <div className="gnb-menu-right">
                         {
-                            info ? <div className="info-text">
-                                <User
-                                    name={info.name}
-                                    squared
-                                />
+                            info ? <div className="info">
+                                <SmoothCorners
+                                    corners="3"
+                                    borderRadius="12px"
+                                    style={{
+                                        width: '50px',
+                                        height: '50px',
+                                        background: '#252525',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        fontSize: '20px',
+                                        fontWeight: 'bold',
+                                        color: '#ffffff',
+                                    }}
+                                    id="info-profile"
+                                >
+                                    {info.name[0]}
+                                </SmoothCorners>
                             </div>
                                 :
                             <Button auto color="primary" shadow onClick={handler}>
@@ -63,31 +78,25 @@ export default function Navbar() {
                 .navbar {
                     margin-top: 1vh;
                 }
-                
                 .container {
                     display: flex;
                     justify-content: space-between;
                 }
-                
                 .title {
                     display: flex;
                     justify-content: center;
                 }
-
                 .gnb-wrap {
                     display: flex;
                     align-self: center;
                 }
-
                 .gnb-menu-right {
                     margin-right: 10vw;
                 }
-
                 .gnb-menu-left {
                     margin-left: 10vw;
                 }
-                
-                .info-text {
+                .info {
                     display: flex;
                     flex-direction: row;
                 }
