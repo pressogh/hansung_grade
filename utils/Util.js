@@ -31,7 +31,7 @@ export function parseGPA(data) {
         } else {
             semester.push(
                 {
-                    x: year + "." + semesterNum + ".",
+                    x: year[2] + year[3] + "." + semesterNum + ".",
                     y: data[item]["average_credits"],
                     subject: data[item]["subject"]
                 }
@@ -88,7 +88,7 @@ export function parseMGPA(data) {
         } else {
             semester.push(
                 {
-                    x: year + "." + semesterNum + ".",
+                    x: year[2] + year[3] + "." + semesterNum + ".",
                     y: mgpaList[item].mgpa,
                     subject: mgpaList[item].subject
                 }
@@ -123,7 +123,7 @@ export const randomData = () => {
         } else {
             res.push(
                 {
-                    x: now.getFullYear() + "." + (now.getMonth() > 6 ? " 2." : " 1."),
+                    x: now.getFullYear().toLocaleString()[2] + now.getFullYear().toLocaleString()[3] + "." + (now.getMonth() > 6 ? " 2." : " 1."),
                     y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
                 }
             );
