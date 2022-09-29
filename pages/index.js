@@ -3,7 +3,7 @@ import {Card, Loading, Text, Switch} from "@nextui-org/react";
 import Title from "../components/Title";
 
 import { useRecoilState } from "recoil";
-import { gradeData, nowGradeData } from "../utils/States";
+import { gradeData, infoData, nowGradeData } from "../utils/States";
 import {getGrade, getInfo, getNowGrade} from "../utils/Api";
 import LineGraph from "../components/Graph/LineGraph";
 import RandomGraph from "../components/Graph/RandomGraph";
@@ -12,7 +12,22 @@ import LeftMemu from "../components/LeftMemu";
 export default function Home() {
     const [grade, setGrade] = useRecoilState(gradeData);
     const [nowGrade, setNowGrade] = useRecoilState(nowGradeData);
+    const [info, setInfo] = useRecoilState(infoData);
     const [contentType, setContentType] = useState(false);
+
+    useEffect(() => {
+        if (!info) {
+            const username = localStorage.getItem("username");
+            const password = localStorage.getItem("password");
+
+            if (username !== null && password !== null) {
+                getInfo(username, password)
+                    .then((data) => {
+                        setInfo(data);
+                    });
+            }
+        }
+    }, [grade]);
 
     useEffect(() => {
         if (!grade) {
@@ -28,19 +43,19 @@ export default function Home() {
         }
     }, [grade]);
 
-    useEffect(() => {
-        if (!nowGrade) {
-            const username = localStorage.getItem("username");
-            const password = localStorage.getItem("password");
-
-            if (username !== null && password !== null) {
-                getNowGrade(username, password)
-                    .then((data) => {
-                        setNowGrade(data);
-                    });
-            }
-        }
-    }, [nowGrade]);
+    // useEffect(() => {
+    //     if (!nowGrade) {
+    //         const username = localStorage.getItem("username");
+    //         const password = localStorage.getItem("password");
+    //
+    //         if (username !== null && password !== null) {
+    //             getNowGrade(username, password)
+    //                 .then((data) => {
+    //                     setNowGrade(data);
+    //                 });
+    //         }
+    //     }
+    // }, [nowGrade]);
 
     const sortBySemester = (data) => {
         data.sort((a, b) => {
