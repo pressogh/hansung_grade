@@ -6,4 +6,4 @@ npm run dev
 yarn dev
 ```
 
-<img width="1768" alt="image" src="https://user-images.githubusercontent.com/50871137/193566042-15155fff-dc8c-4f3a-a794-7a0cd2f20da4.png">
+<img width="1708" alt="image" src="https://user-images.githubusercontent.com/50871137/193567388-aec10595-f443-4f3b-a8b6-2602d6aeeb0e.png">
