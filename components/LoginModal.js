@@ -27,8 +27,8 @@ export default function LoginModal({ visible, closeHandler }) {
     const handleLoginButtonClick = async () => {
         closeHandler();
         setGradeData("loading");
-        setGradeData(await getGrade(id, passwd, rememberMe));
-        setInfoData(await getInfo(id, passwd));
+        setGradeData(await getGrade(id, passwd));
+        setInfoData(await getInfo(id, passwd, rememberMe));
     }
 
     return (
@@ -53,7 +53,6 @@ export default function LoginModal({ visible, closeHandler }) {
             </Modal.Header>
             <Modal.Body>
                 <Input
-                    clearable
                     bordered
                     fullWidth
                     color="primary"
@@ -69,7 +68,7 @@ export default function LoginModal({ visible, closeHandler }) {
                     value={passwd}
                 />
                 <Row justify="space-between">
-                    <Checkbox isSelected={rememberMe} onChange={setRememberMe} >
+                    <Checkbox isSelected={rememberMe} onChange={() => setRememberMe(!rememberMe)} >
                         <Text size={14}>로그인 유지</Text>
                     </Checkbox>
                 </Row>

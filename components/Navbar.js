@@ -1,16 +1,125 @@
 import React, {useEffect, useState} from "react";
-import Image from "next/image";
-import { Button, Text, User } from "@nextui-org/react";
+import { Button, Popover, Text, User } from "@nextui-org/react";
 import LoginModal from "../components/LoginModal";
 import Link from "next/link";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { infoData } from '../utils/States';
-import {getInfo} from "../utils/Api";
+import { gradeData, infoData } from "../utils/States";
+import SmoothBorder from "./SmoothBorder";
+import { FiExternalLink, FiLogOut, FiX } from "react-icons/fi";
+import { getGradeSimple } from "../utils/Util";
+
+export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
+    return (
+        <div>
+            <div className="info-detail">
+                <div className="info-detail-title">
+                    <div className="info-detail-title-left">
+                        <SmoothBorder content={info.name[0]} size={40} />
+                        <div>
+                            <div className="info-detail-name">
+                                {info.name}
+                            </div>
+                            <div className="info-detail-track">
+                                {info.track1}•{info.track2}
+                            </div>
+                        </div>
+                    </div>
+                    <div onClick={() => {
+                        localStorage.removeItem("username");
+                        localStorage.removeItem("password");
+                        setInfo("");
+                        setGrade("");
+                    }}>
+                        <FiLogOut size={20} color={"#F31260"} />
+                    </div>
+                    {/*<a href={"https://info.hansung.ac.kr/tonicsoft/jik/register/collage_register_hakjuk_rwd.jsp"}>*/}
+                    {/*    <FiExternalLink color={"#cacaca"} size={20} />*/}
+                    {/*</a>*/}
+                </div>
+                <div className="info-detail-content">
+                    <div className="info-detail-item">
+                        <div className="info-detail-item-up-text">{info.grade}</div>
+                        <div className="info-detail-item-down-text">학년</div>
+                    </div>
+                    <div className="info-detail-item">
+                        <div className="info-detail-item-up-text">{getGradeSimple(grade)}</div>
+                        <div className="info-detail-item-down-text">학점</div>
+                    </div>
+                    <div className="info-detail-item">
+                        <div className="info-detail-item-up-text">
+                            <FiX size={20} />
+                        </div>
+                        <div className="info-detail-item-down-text">비교과</div>
+                    </div>
+                </div>
+            </div>
+
+            <style jsx>{`
+                .info-detail {
+                    display: flex;
+                    flex-direction: column; 
+                    padding: 1vw;
+                    min-width: 200px;
+                    width: 15vw;
+                }
+                .info-detail-title {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    border-bottom: 1px dotted rgba(219, 219, 219, 1);
+                    padding-bottom: 2vh;
+                    margin-bottom: 2vh;
+                }
+                .info-detail-title-left {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                }
+                .info-detail-name {
+                    margin-left: 1vw;
+                    font-weight: bold;
+                    font-size: 22px;
+                }
+                .info-detail-track {
+                    margin-left: 1vw;
+                    font-size: 12px;
+                }
+                .info-detail-grade {
+                    font-weight: lighter;
+                    font-size: 1.5vw;
+                }
+                .info-detail-content {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                }
+                .info-detail-item {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                }
+                .info-detail-item-up-text {
+                    font-weight: bold;
+                    font-size: 22px;
+                }
+                .info-detail-item-down-text {
+                    //font-weight: bold;
+                    font-size: 16px;
+                }
+            `}</style>
+        </div>
+    )
+}
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);
-    const info = useRecoilValue(infoData);
+    const [info, setInfo] = useRecoilState(infoData);
+    const [grade, setGrade] = useRecoilState(gradeData);
 
     const handler = () => {
         setVisible(true);
@@ -43,14 +152,23 @@ export default function Navbar() {
                 <div className="gnb-wrap">
                     <div className="gnb-menu-right">
                         {
-                            info ? <div className="info-text">
-                                <User
-                                    name={info.name}
-                                    squared
-                                />
-                            </div>
+                            info ?
+                                <div className="info">
+                                    <Popover
+                                        placement="bottom"
+                                    >
+                                        <Popover.Trigger>
+                                            <div>
+                                                <SmoothBorder content={info.name[0]} size={50} />
+                                            </div>
+                                        </Popover.Trigger>
+                                        <Popover.Content>
+                                            <InfoPopOver info={info} setInfo={setInfo} grade={grade} setGrade={setGrade} />
+                                        </Popover.Content>
+                                    </Popover>
+                                </div>
                                 :
-                            <Button auto color="primary" shadow onClick={handler}>
+                            <Button auto color="primary" onClick={handler}>
                                 로그인
                             </Button> 
                         }
@@ -63,31 +181,25 @@ export default function Navbar() {
                 .navbar {
                     margin-top: 1vh;
                 }
-                
                 .container {
                     display: flex;
                     justify-content: space-between;
                 }
-                
                 .title {
                     display: flex;
                     justify-content: center;
                 }
-
                 .gnb-wrap {
                     display: flex;
                     align-self: center;
                 }
-
                 .gnb-menu-right {
                     margin-right: 10vw;
                 }
-
                 .gnb-menu-left {
                     margin-left: 10vw;
                 }
-                
-                .info-text {
+                .info {
                     display: flex;
                     flex-direction: row;
                 }

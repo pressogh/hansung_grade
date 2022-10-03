@@ -3,7 +3,7 @@ import { ApiError } from "next/dist/server/api-utils";
 import { toast } from 'react-toastify';
 import {ErrorMessage} from "./ErrorMessage";
 
-export const getGrade = async (username, password, rememberMe) => {
+export const getGrade = async (username, password) => {
     const data = {
         "username": username,
         "password": password

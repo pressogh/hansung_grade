@@ -3,16 +3,32 @@ import {Card, Loading, Text, Switch} from "@nextui-org/react";
 import Title from "../components/Title";
 
 import { useRecoilState } from "recoil";
-import { gradeData, nowGradeData } from "../utils/States";
+import { gradeData, infoData, nowGradeData } from "../utils/States";
 import {getGrade, getInfo, getNowGrade} from "../utils/Api";
 import LineGraph from "../components/Graph/LineGraph";
 import RandomGraph from "../components/Graph/RandomGraph";
 import LeftMemu from "../components/LeftMemu";
+import { getGradeSimple } from "../utils/Util";
 
 export default function Home() {
     const [grade, setGrade] = useRecoilState(gradeData);
     const [nowGrade, setNowGrade] = useRecoilState(nowGradeData);
+    const [info, setInfo] = useRecoilState(infoData);
     const [contentType, setContentType] = useState(false);
+
+    useEffect(() => {
+        if (!info) {
+            const username = localStorage.getItem("username");
+            const password = localStorage.getItem("password");
+
+            if (username !== null && password !== null) {
+                getInfo(username, password)
+                    .then((data) => {
+                        setInfo(data);
+                    });
+            }
+        }
+    }, [grade]);
 
     useEffect(() => {
         if (!grade) {
@@ -28,19 +44,19 @@ export default function Home() {
         }
     }, [grade]);
 
-    useEffect(() => {
-        if (!nowGrade) {
-            const username = localStorage.getItem("username");
-            const password = localStorage.getItem("password");
-
-            if (username !== null && password !== null) {
-                getNowGrade(username, password)
-                    .then((data) => {
-                        setNowGrade(data);
-                    });
-            }
-        }
-    }, [nowGrade]);
+    // useEffect(() => {
+    //     if (!nowGrade) {
+    //         const username = localStorage.getItem("username");
+    //         const password = localStorage.getItem("password");
+    //
+    //         if (username !== null && password !== null) {
+    //             getNowGrade(username, password)
+    //                 .then((data) => {
+    //                     setNowGrade(data);
+    //                 });
+    //         }
+    //     }
+    // }, [nowGrade]);
 
     const sortBySemester = (data) => {
         data.sort((a, b) => {
@@ -63,6 +79,12 @@ export default function Home() {
                 {/*<LeftMemu contentType={contentType} setContentType={setContentType} />*/}
 
                 <div className="chart">
+                    <div className="chart-title">
+                        <div className="chart-title-info">학점</div>
+                        {
+                            (grade !== "" && grade !== "loading") && (<div className="chart-title-content">{getGradeSimple(grade)}</div>)
+                        }
+                    </div>
                     <div className="chart-border">
                         {
                             (grade === "" && nowGrade === "") ?
@@ -94,16 +116,32 @@ export default function Home() {
                 }
                 .chart {
                     display: flex;
+                    flex-direction: column;
                     justify-items: center;
+                    margin-top: 5vh;
+                }
+                .chart-title {
+                    display: flex;
+                    flex-direction: row;
                     align-items: center;
-                    margin-top: 10vh;
+                    margin-bottom: 2vh;
+                    margin-left: 2vw;
+                }
+                .chart-title-info {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                }
+                .chart-title-content {
+                    margin-left: 1vw;
+                    font-size: 2.5rem;
+                    //font-weight: bold;
                 }
                 .chart-border {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     width: 80vw;
-                    height: 65vh;
+                    height: 65vmin;
                     background: white;
                     padding: 1vw;
                     border-radius: 3vmin;
