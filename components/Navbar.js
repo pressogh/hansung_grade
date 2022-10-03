@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { gradeData, infoData } from "../utils/States";
 import SmoothBorder from "./SmoothBorder";
-import { FiExternalLink, FiX } from "react-icons/fi";
+import { FiExternalLink, FiLogOut, FiX } from "react-icons/fi";
 import { getGradeSimple } from "../utils/Util";
 
-const InfoPopOver = ({ info, grade }) => {
+export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
     return (
         <div>
             <div className="info-detail">
@@ -25,9 +25,17 @@ const InfoPopOver = ({ info, grade }) => {
                             </div>
                         </div>
                     </div>
-                    <a href={"https://info.hansung.ac.kr/tonicsoft/jik/register/collage_register_hakjuk_rwd.jsp"}>
-                        <FiExternalLink color={"#cacaca"} size={20} />
-                    </a>
+                    <div onClick={() => {
+                        localStorage.removeItem("username");
+                        localStorage.removeItem("password");
+                        setInfo("");
+                        setGrade("");
+                    }}>
+                        <FiLogOut size={20} color={"#F31260"} />
+                    </div>
+                    {/*<a href={"https://info.hansung.ac.kr/tonicsoft/jik/register/collage_register_hakjuk_rwd.jsp"}>*/}
+                    {/*    <FiExternalLink color={"#cacaca"} size={20} />*/}
+                    {/*</a>*/}
                 </div>
                 <div className="info-detail-content">
                     <div className="info-detail-item">
@@ -110,8 +118,8 @@ const InfoPopOver = ({ info, grade }) => {
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);
-    const info = useRecoilValue(infoData);
-    const grade = useRecoilValue(gradeData);
+    const [info, setInfo] = useRecoilState(infoData);
+    const [grade, setGrade] = useRecoilState(gradeData);
 
     const handler = () => {
         setVisible(true);
@@ -155,7 +163,7 @@ export default function Navbar() {
                                             </div>
                                         </Popover.Trigger>
                                         <Popover.Content>
-                                            <InfoPopOver info={info} grade={grade} />
+                                            <InfoPopOver info={info} setInfo={setInfo} grade={grade} setGrade={setGrade} />
                                         </Popover.Content>
                                     </Popover>
                                 </div>

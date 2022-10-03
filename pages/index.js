@@ -81,7 +81,9 @@ export default function Home() {
                 <div className="chart">
                     <div className="chart-title">
                         <div className="chart-title-info">학점</div>
-                        <div className="chart-title-content">{getGradeSimple(grade)}</div>
+                        {
+                            (grade !== "" && grade !== "loading") && (<div className="chart-title-content">{getGradeSimple(grade)}</div>)
+                        }
                     </div>
                     <div className="chart-border">
                         {
