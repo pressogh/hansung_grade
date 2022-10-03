@@ -137,3 +137,22 @@ export const randomData = () => {
         }
     ];
 }
+
+/**
+ * @param data 학점 데이터
+ * @returns {number} 평균 학점(소수점 뒤 2자리까지)
+ * @description 학점 데이터를 받아 평균 학점을 계산
+ */
+export const getGradeSimple = (data) => {
+    let gp = 0.0, count = 0;
+    for (let item in data) {
+        for (let subject in data[item]["subject"]) {
+            if (data[item]["subject"][subject].grade !== "N" && data[item]["subject"][subject].grade !== "P") {
+                gp += gradeWeight[data[item]["subject"][subject].grade];
+                count++;
+            }
+        }
+    }
+
+    return Math.floor(gp / count * 100) / 100;
+}

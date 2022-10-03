@@ -8,6 +8,7 @@ import {getGrade, getInfo, getNowGrade} from "../utils/Api";
 import LineGraph from "../components/Graph/LineGraph";
 import RandomGraph from "../components/Graph/RandomGraph";
 import LeftMemu from "../components/LeftMemu";
+import { getGradeSimple } from "../utils/Util";
 
 export default function Home() {
     const [grade, setGrade] = useRecoilState(gradeData);
@@ -79,7 +80,8 @@ export default function Home() {
 
                 <div className="chart">
                     <div className="chart-title">
-                        학점
+                        <div className="chart-title-info">학점</div>
+                        <div className="chart-title-content">{getGradeSimple(grade)}</div>
                     </div>
                     <div className="chart-border">
                         {
@@ -117,10 +119,20 @@ export default function Home() {
                     margin-top: 5vh;
                 }
                 .chart-title {
-                    font-size: 2.5rem;
-                    font-weight: bold;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
                     margin-bottom: 2vh;
                     margin-left: 2vw;
+                }
+                .chart-title-info {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                }
+                .chart-title-content {
+                    margin-left: 1vw;
+                    font-size: 2.5rem;
+                    //font-weight: bold;
                 }
                 .chart-border {
                     display: flex;
