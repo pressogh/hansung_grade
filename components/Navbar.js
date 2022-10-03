@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { gradeData, infoData } from "../utils/States";
 import SmoothBorder from "./SmoothBorder";
-import { FiExternalLink, FiLogOut, FiX } from "react-icons/fi";
+import { FiLogOut, FiX } from "react-icons/fi";
 import { getGradeSimple } from "../utils/Util";
+import { toast } from "react-toastify";
 
 export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
     return (
@@ -25,12 +26,16 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => {
-                        localStorage.removeItem("username");
-                        localStorage.removeItem("password");
-                        setInfo("");
-                        setGrade("");
-                    }}>
+                    <div
+                        className="info-detail-title-right"
+                        onClick={() => {
+                            localStorage.removeItem("username");
+                            localStorage.removeItem("password");
+                            setInfo("");
+                            setGrade("");
+                            toast.success("로그아웃 되었습니다.");
+                        }}
+                    >
                         <FiLogOut size={20} color={"#F31260"} />
                     </div>
                     {/*<a href={"https://info.hansung.ac.kr/tonicsoft/jik/register/collage_register_hakjuk_rwd.jsp"}>*/}
@@ -77,6 +82,10 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                     flex-direction: row;
                     align-items: center;
                     width: 100%;
+                }
+                .info-detail-title-right {
+                    display: flex;
+                    align-self: flex-start;
                 }
                 .info-detail-name {
                     margin-left: 1vw;
