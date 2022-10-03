@@ -36,7 +36,9 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                             toast.success("로그아웃 되었습니다.");
                         }}
                     >
-                        <FiLogOut size={20} color={"#F31260"} />
+                        <div className="logout-icon">
+                            <FiLogOut size={20} color={"#F31260"} />
+                        </div>
                     </div>
                     {/*<a href={"https://info.hansung.ac.kr/tonicsoft/jik/register/collage_register_hakjuk_rwd.jsp"}>*/}
                     {/*    <FiExternalLink color={"#cacaca"} size={20} />*/}
@@ -63,7 +65,7 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
             <style jsx>{`
                 .info-detail {
                     display: flex;
-                    flex-direction: column; 
+                    flex-direction: column;
                     padding: 1vw;
                     min-width: 200px;
                     width: 15vw;
@@ -119,6 +121,9 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                 .info-detail-item-down-text {
                     //font-weight: bold;
                     font-size: 16px;
+                }
+                .logout-icon {
+                  filter: drop-shadow(1px 2px 2px rgba(255, 0, 0, 0.5));
                 }
             `}</style>
         </div>
