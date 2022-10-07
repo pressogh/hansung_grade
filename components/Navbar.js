@@ -55,7 +55,8 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                     </div>
                     <div className="info-detail-item">
                         <div className="info-detail-item-up-text">
-                            <FiX size={20} />
+                            미지원
+                            {/*<FiX size={20} />*/}
                         </div>
                         <div className="info-detail-item-down-text">비교과</div>
                     </div>
@@ -66,9 +67,9 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                 .info-detail {
                     display: flex;
                     flex-direction: column;
-                    padding: 1vw;
+                    padding: 20px;
                     min-width: 200px;
-                    width: 15vw;
+                    width: 300px;
                 }
                 .info-detail-title {
                     display: flex;
@@ -124,6 +125,11 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                 }
                 .logout-icon {
                   filter: drop-shadow(1px 2px 2px rgba(255, 0, 0, 0.5));
+                  transition: 0.2s;
+                }
+                .logout-icon:hover {
+                    transform: scale(1.25);
+                    transition: 0.2s;
                 }
             `}</style>
         </div>
@@ -216,6 +222,7 @@ export default function Navbar() {
                 .info {
                     display: flex;
                     flex-direction: row;
+                    cursor: pointer;
                 }
             `}</style>
         </nav>
