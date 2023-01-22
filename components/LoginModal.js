@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
-import { Password } from "./icons/Password";
-import { StudentNumber } from "./icons/StudentNumber";
-import { getGrade, getInfo } from "../utils/Api";
+import { Password } from "@/components/icons/Password";
+import { StudentNumber } from "@/components/icons/StudentNumber";
+import { getGrade, getInfo } from "@/utils/Api";
 
 import { useRecoilState } from 'recoil';
-import { gradeData, username, password, infoData } from "../utils/States";
+import { gradeData, username, password, infoData } from "@/utils/States";
 
 
 export default function LoginModal({ visible, closeHandler }) {

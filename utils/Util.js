@@ -111,19 +111,22 @@ export const randomData = () => {
     const now = new Date();
     for (let i = 0; i < 6; i++) {
         now.setDate(now.getDate() - 182);
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const semester = (3 <= month && month <= 8) ? 2 : 1;
 
         // vw가 775px 이하라면
         if (window.innerWidth > 775) {
             res.push(
                 {
-                    x: now.getFullYear() + "학년도" + (now.getMonth() > 6 ? " 2학기" : " 1학기"),
+                    x: year + "학년도" + (` ${semester}학기`),
                     y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
                 }
             );
         } else {
             res.push(
                 {
-                    x: now.getFullYear().toLocaleString()[2] + now.getFullYear().toLocaleString()[3] + "." + (now.getMonth() > 6 ? " 2." : " 1."),
+                    x: year + "." + ` ${semester}.`,
                     y: (Math.round((Math.random() * (4.5 - 3.5) + 3.5) * 100) / 100).toString()
                 }
             );

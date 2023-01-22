@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@nivo/line'
-import { parseGPA, parseMGPA } from "../../utils/Util";
-import {Tooltip} from "./Tooltip";
+import { parseGPA, parseMGPA } from "@/utils/Util";
+import {Tooltip} from "@/components/Graph/Tooltip";
 import {useEffect, useState} from "react";
 
 export default function LineGraph({ data, type }) {

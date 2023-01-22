@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {Card, Loading, Text, Switch} from "@nextui-org/react";
-import Title from "../components/Title";
+import Title from "@/components/Title";
 
 import { useRecoilState } from "recoil";
-import { gradeData, infoData, nowGradeData } from "../utils/States";
-import {getGrade, getInfo, getNowGrade} from "../utils/Api";
-import LineGraph from "../components/Graph/LineGraph";
-import RandomGraph from "../components/Graph/RandomGraph";
-import LeftMemu from "../components/LeftMemu";
-import { getGradeSimple } from "../utils/Util";
+import { gradeData, infoData, nowGradeData } from "@/utils/States";
+import {getGrade, getInfo, getNowGrade} from "@/utils/Api";
+import LineGraph from "@/components/Graph/LineGraph";
+import RandomGraph from "@/components/Graph/RandomGraph";
+import LeftMemu from "@/components/LeftMemu";
+import { getGradeSimple } from "@/utils/Util";
 
 export default function Home() {
     const [grade, setGrade] = useRecoilState(gradeData);

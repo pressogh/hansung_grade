@@ -1,5 +1,4 @@
-import { parseGPA, parseMGPA } from "../../utils/Util";
-import {Tooltip} from "./Tooltip";
+import { parseGPA, parseMGPA } from "@/utils/Util";
 import {useEffect, useState} from "react";
 
 export default function Progress({ data, type }) {

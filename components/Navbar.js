@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import { Button, Popover, Text, User } from "@nextui-org/react";
-import LoginModal from "../components/LoginModal";
+import LoginModal from "@/components/LoginModal";
 import Link from "next/link";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { gradeData, infoData } from "../utils/States";
-import SmoothBorder from "./SmoothBorder";
+import { gradeData, infoData } from "@/utils/States";
+import SmoothBorder from "@/components/SmoothBorder";
 import { FiLogOut, FiX } from "react-icons/fi";
-import { getGradeSimple } from "../utils/Util";
+import { getGradeSimple } from "@/utils/Util";
 import { toast } from "react-toastify";
 
 export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
@@ -16,13 +16,13 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
             <div className="info-detail">
                 <div className="info-detail-title">
                     <div className="info-detail-title-left">
-                        <SmoothBorder content={info.name[0]} size={40} />
+                        <SmoothBorder content={info?.name[0]} size={40} />
                         <div>
                             <div className="info-detail-name">
-                                {info.name}
+                                {info?.name}
                             </div>
                             <div className="info-detail-track">
-                                {info.track1}•{info.track2}
+                                {info?.track1}•{info?.track2}
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                     flex-direction: column;
                     padding: 20px;
                     min-width: 200px;
-                    width: 300px;
+                    width: 340px;
                 }
                 .info-detail-title {
                     display: flex;
@@ -179,7 +179,7 @@ export default function Navbar() {
                                     >
                                         <Popover.Trigger>
                                             <div>
-                                                <SmoothBorder content={info.name[0]} size={50} />
+                                                <SmoothBorder content={info?.name[0]} size={50} />
                                             </div>
                                         </Popover.Trigger>
                                         <Popover.Content>
@@ -190,7 +190,7 @@ export default function Navbar() {
                                 :
                             <Button auto color="primary" onClick={handler}>
                                 로그인
-                            </Button> 
+                            </Button>
                         }
 
                     </div>
