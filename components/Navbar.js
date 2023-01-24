@@ -155,18 +155,16 @@ export default function Navbar() {
             <div className="container">
                 <div className="gnb-menu-left">
                     <Link href="/">
-                        <a className="title">
-                            <Text
-                                h1
-                                size={50}
-                                css={{
+                        <Text
+                            h1
+                            size={50}
+                            css={{
                                 textGradient: "90deg, $blue500 -20%, $pink500 50%",
                                 marginLeft: "30px"
-                                }}
-                            >
-                                한움
-                            </Text>
-                        </a>
+                            }}
+                        >
+                            한움
+                        </Text>
                     </Link>
                 </div>
                 <div className="gnb-wrap">

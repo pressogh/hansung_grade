@@ -5,8 +5,8 @@ import Title from "@/components/Title";
 import { useRecoilState } from "recoil";
 import { gradeData, infoData, nowGradeData } from "@/utils/States";
 import {getGrade, getInfo, getNowGrade} from "@/utils/Api";
-import LineGraph from "@/components/Graph/LineGraph";
-import RandomGraph from "@/components/Graph/RandomGraph";
+import LineGraph from "@/components/graph/LineGraph";
+import RandomGraph from "@/components/graph/RandomGraph";
 import LeftMemu from "@/components/LeftMemu";
 import { getGradeSimple } from "@/utils/Util";
 
