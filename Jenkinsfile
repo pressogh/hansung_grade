@@ -37,7 +37,7 @@ pipeline {
                             -p 3000:3000 \
                             --restart unless-stopped \
                             -e "TZ=Asia/Seoul" \
-                            --network custom_network \
+                            --network app_custom_network \
                             --ip 172.18.0.2 \
                             $USERNAME/$JOB_NAME:latest'
                     }
