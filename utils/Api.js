@@ -20,7 +20,7 @@ export const getGrade = async (username, password) => {
       redirect: 'follow',
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/grade`, requestOptions)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/grade`, requestOptions)
         .then((response) => {
             if (!response.ok) {
                 if (ErrorMessage[response.status]) toast.error(`[${response.status}] ${ErrorMessage[response.status]}`);
@@ -55,7 +55,7 @@ export const getNowGrade = async (username, password, rememberMe) => {
         redirect: 'follow',
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/nowgrade`, requestOptions)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/nowgrade`, requestOptions)
         .then((response) => {
             if (!response.ok) {
                 if (ErrorMessage[response.status]) toast.error(`[${response.status}] ${ErrorMessage[response.status]}`);
@@ -90,7 +90,7 @@ export const getInfo = async (username, password, rememberMe) => {
         redirect: 'follow',
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/info`, requestOptions)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/info`, requestOptions)
         .then((response) => {
             if (!response.ok) {
                 if (ErrorMessage[response.status]) toast.error(`[${response.status}] ${ErrorMessage[response.status]}`);
