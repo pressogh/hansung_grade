@@ -1,8 +1,8 @@
 import { ResponsiveLine } from '@nivo/line'
-import { randomData } from "../../utils/Util";
-import { useInterval } from "../../hooks/Hooks";
-import {useEffect, useState} from "react";
-import {Loading} from "@nextui-org/react";
+import { randomData } from "@/utils/Util";
+import { useInterval } from "@/hooks/Hooks";
+import { useEffect, useState } from "react";
+import { Loading } from "@nextui-org/react";
 
 export default function RandomGraph() {
     const [randomGrade, setRandomGrade] = useState(0);

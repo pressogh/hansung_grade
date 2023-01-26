@@ -1,7 +1,7 @@
 import { NextUIProvider } from '@nextui-org/react'
 import { RecoilRoot } from 'recoil'
 import { ToastContainer, Zoom, Slide } from 'react-toastify'
-import Layout from '../layouts/Layout'
+import Layout from '@/layouts/Layout'
 
 import 'react-toastify/dist/ReactToastify.min.css'
 

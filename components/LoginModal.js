@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
-import { Password } from "./icons/Password";
-import { StudentNumber } from "./icons/StudentNumber";
-import { getGrade, getInfo } from "../utils/Api";
+import { Password } from "@/components/icons/Password";
+import { StudentNumber } from "@/components/icons/StudentNumber";
+import { getGrade, getInfo } from "@/utils/Api";
 
 import { useRecoilState } from 'recoil';
-import { gradeData, username, password, infoData } from "../utils/States";
+import { gradeData, username, password, infoData } from "@/utils/States";
 
 
 export default function LoginModal({ visible, closeHandler }) {
@@ -38,6 +38,11 @@ export default function LoginModal({ visible, closeHandler }) {
             aria-labelledby="modal-title"
             open={visible}
             onClose={closeHandler}
+            onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                    handleLoginButtonClick();
+                }
+            }}
         >
             <Modal.Header>
                 <Text
@@ -64,6 +69,7 @@ export default function LoginModal({ visible, closeHandler }) {
                 />
                 <Input.Password
                     contentLeft={<Password fill="currentColor" />}
+                    placeholder="비밀번호"
                     onChange={handlePasswordChange}
                     value={passwd}
                 />

@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { Button, Popover, Text, User } from "@nextui-org/react";
-import LoginModal from "../components/LoginModal";
+import LoginModal from "@/components/LoginModal";
 import Link from "next/link";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { gradeData, infoData } from "../utils/States";
-import SmoothBorder from "./SmoothBorder";
-import { FiExternalLink, FiLogOut, FiX } from "react-icons/fi";
-import { getGradeSimple } from "../utils/Util";
+import { gradeData, infoData } from "@/utils/States";
+import SmoothBorder from "@/components/SmoothBorder";
+import { FiLogOut, FiX } from "react-icons/fi";
+import { getGradeSimple } from "@/utils/Util";
+import { toast } from "react-toastify";
 
 export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
     return (
@@ -15,23 +16,29 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
             <div className="info-detail">
                 <div className="info-detail-title">
                     <div className="info-detail-title-left">
-                        <SmoothBorder content={info.name[0]} size={40} />
+                        <SmoothBorder content={info?.name[0]} size={40} />
                         <div>
                             <div className="info-detail-name">
-                                {info.name}
+                                {info?.name}
                             </div>
                             <div className="info-detail-track">
-                                {info.track1}•{info.track2}
+                                {info?.track1}•{info?.track2}
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => {
-                        localStorage.removeItem("username");
-                        localStorage.removeItem("password");
-                        setInfo("");
-                        setGrade("");
-                    }}>
-                        <FiLogOut size={20} color={"#F31260"} />
+                    <div
+                        className="info-detail-title-right"
+                        onClick={() => {
+                            localStorage.removeItem("username");
+                            localStorage.removeItem("password");
+                            setInfo("");
+                            setGrade("");
+                            toast.success("로그아웃 되었습니다.");
+                        }}
+                    >
+                        <div className="logout-icon">
+                            <FiLogOut size={20} color={"#F31260"} />
+                        </div>
                     </div>
                     {/*<a href={"https://info.hansung.ac.kr/tonicsoft/jik/register/collage_register_hakjuk_rwd.jsp"}>*/}
                     {/*    <FiExternalLink color={"#cacaca"} size={20} />*/}
@@ -48,7 +55,8 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                     </div>
                     <div className="info-detail-item">
                         <div className="info-detail-item-up-text">
-                            <FiX size={20} />
+                            미지원
+                            {/*<FiX size={20} />*/}
                         </div>
                         <div className="info-detail-item-down-text">비교과</div>
                     </div>
@@ -58,10 +66,10 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
             <style jsx>{`
                 .info-detail {
                     display: flex;
-                    flex-direction: column; 
-                    padding: 1vw;
+                    flex-direction: column;
+                    padding: 20px;
                     min-width: 200px;
-                    width: 15vw;
+                    width: 340px;
                 }
                 .info-detail-title {
                     display: flex;
@@ -77,6 +85,10 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                     flex-direction: row;
                     align-items: center;
                     width: 100%;
+                }
+                .info-detail-title-right {
+                    display: flex;
+                    align-self: flex-start;
                 }
                 .info-detail-name {
                     margin-left: 1vw;
@@ -111,6 +123,14 @@ export const InfoPopOver = ({ info, setInfo, grade, setGrade }) => {
                     //font-weight: bold;
                     font-size: 16px;
                 }
+                .logout-icon {
+                  filter: drop-shadow(1px 2px 2px rgba(255, 0, 0, 0.5));
+                  transition: 0.2s;
+                }
+                .logout-icon:hover {
+                    transform: scale(1.25);
+                    transition: 0.2s;
+                }
             `}</style>
         </div>
     )
@@ -135,18 +155,16 @@ export default function Navbar() {
             <div className="container">
                 <div className="gnb-menu-left">
                     <Link href="/">
-                        <a className="title">
-                            <Text
-                                h1
-                                size={50}
-                                css={{
+                        <Text
+                            h1
+                            size={50}
+                            css={{
                                 textGradient: "90deg, $blue500 -20%, $pink500 50%",
                                 marginLeft: "30px"
-                                }}
-                            >
-                                한움
-                            </Text>
-                        </a>
+                            }}
+                        >
+                            한움
+                        </Text>
                     </Link>
                 </div>
                 <div className="gnb-wrap">
@@ -159,7 +177,7 @@ export default function Navbar() {
                                     >
                                         <Popover.Trigger>
                                             <div>
-                                                <SmoothBorder content={info.name[0]} size={50} />
+                                                <SmoothBorder content={info?.name[0]} size={50} />
                                             </div>
                                         </Popover.Trigger>
                                         <Popover.Content>
@@ -170,7 +188,7 @@ export default function Navbar() {
                                 :
                             <Button auto color="primary" onClick={handler}>
                                 로그인
-                            </Button> 
+                            </Button>
                         }
 
                     </div>
@@ -202,6 +220,7 @@ export default function Navbar() {
                 .info {
                     display: flex;
                     flex-direction: row;
+                    cursor: pointer;
                 }
             `}</style>
         </nav>

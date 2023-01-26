@@ -1,5 +1,5 @@
 import {Card, Text} from "@nextui-org/react";
-import {gradeWeight} from "../../utils/Util";
+import {gradeWeight} from "@/utils/Util";
 
 export const Tooltip = ({ data }) => {
     let lst = data.point.data.subject.slice();
@@ -18,12 +18,12 @@ export const Tooltip = ({ data }) => {
                 {
                     lst.map((item) => {
                         return (
-                            <div key={item.name} className="tooltip-item">
+                            <div key={item?.name} className="tooltip-item">
                                 <div className='tooltip-name'>
-                                    { item.name }
+                                    { item?.name }
                                 </div>
                                 <div className='tooltip-grade'>
-                                    { item.grade }
+                                    { item?.grade }
                                 </div>
                             </div>
                         );
