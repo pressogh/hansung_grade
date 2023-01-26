@@ -7,5 +7,4 @@ RUN npm install -g pm2
 RUN yarn install
 
 RUN npm run build
-
-COPY /app/build /usr/share/nginx/html/hansung-grade
+CMD ["pm2-runtime", "start", "npm", "--", "start"]

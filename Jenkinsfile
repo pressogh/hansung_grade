@@ -46,7 +46,6 @@ pipeline {
                             -e "TZ=Asia/Seoul" \
                             --network app_custom_network \
                             --ip 172.18.0.2 \
-                            -v /usr/share/nginx/html:/usr/share/nginx/html \
                             $USERNAME/$JOB_NAME:latest'
                     }
                 }
