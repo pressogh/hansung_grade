@@ -1,9 +1,10 @@
 import { NextUIProvider } from '@nextui-org/react'
 import { RecoilRoot } from 'recoil'
-import { ToastContainer, Zoom, Slide } from 'react-toastify'
+import { ToastContainer, Slide } from 'react-toastify'
 import Layout from '@/layouts/Layout'
 
 import 'react-toastify/dist/ReactToastify.min.css'
+import "@/styles/globals.scss";
 
 export default function App({ Component, pageProps }) {
     return (
@@ -24,12 +25,6 @@ export default function App({ Component, pageProps }) {
                         />
                     </div>
                 </Layout>
-
-                <style jsx>{`
-                    .container {
-                        margin: 0 0 0 10vw;
-                    }
-                `}</style>
             </NextUIProvider>
         </RecoilRoot>
     )
