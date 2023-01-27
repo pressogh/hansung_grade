@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { Button, Popover, Text, User } from "@nextui-org/react";
 import LoginModal from "@/components/LoginModal";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { gradeData, infoData } from "@/utils/States";
 import SmoothBorder from "@/components/SmoothBorder";
-import { FiLogOut, FiX } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import { getGradeSimple } from "@/utils/Util";
 import { toast } from "react-toastify";
 

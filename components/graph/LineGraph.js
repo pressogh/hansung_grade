@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 import { parseGPA, parseMGPA } from "@/utils/Util";
-import {Tooltip} from "@/components/graph/Tooltip";
-import {useEffect, useState} from "react";
+import { Tooltip } from "@/components/graph/Tooltip";
+import { useEffect, useState } from "react";
 
 export default function LineGraph({ data, type }) {
     const [parsedData, setParsedData] = useState([]);
