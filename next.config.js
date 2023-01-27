@@ -1,4 +1,5 @@
 const intercept = require("intercept-stdout")
+const path = require("path")
 
 // safely ignore recoil stdout warning messages
 function interceptStdout(text) {
@@ -19,9 +20,10 @@ const nextConfig = {
   // To Fix Nextjs Runs useEffect Twice
   // https://github.com/vercel/next.js/issues/35957
   reactStrictMode: false, // default => true
-  experimental: {
-    outputStandalone: true,
-  }
+  output: "standalone",
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
 }
 
 module.exports = nextConfig

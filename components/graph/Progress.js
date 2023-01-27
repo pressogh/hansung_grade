@@ -1,5 +1,5 @@
 import { parseGPA, parseMGPA } from "@/utils/Util";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 export default function Progress({ data, type }) {
 	const [parsedData, setParsedData] = useState([]);
