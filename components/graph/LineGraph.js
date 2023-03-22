@@ -2,14 +2,23 @@ import { ResponsiveLine } from '@nivo/line'
 import { parseGPA, parseMGPA } from "@/utils/Util";
 import { Tooltip } from "@/components/graph/Tooltip";
 import { useEffect, useState } from "react";
+import { GraphType } from "@/utils/types";
 
 export default function LineGraph({ data, type }) {
     const [parsedData, setParsedData] = useState([]);
 
     useEffect(() => {
-        if (type === "GPA") setParsedData(parseGPA(data));
-        else if (type === "MGPA") setParsedData(parseMGPA(data));
-        else if (type === "BothGPA") setParsedData([...parseGPA(data), ...parseMGPA(data)]);
+        switch (type) {
+            case GraphType.GPA:
+                setParsedData(parseGPA(data));
+                break;
+            case GraphType.MGPA:
+                setParsedData(parseMGPA(data));
+                break;
+            case GraphType.BOTH:
+                setParsedData([...parseGPA(data), ...parseMGPA(data)]);
+                break;
+        }
     }, [data, type])
 
     return (
@@ -21,7 +30,7 @@ export default function LineGraph({ data, type }) {
                 type: 'linear',
                 min: 'auto',
                 max: 'auto',
-                stacked: type !== "BothGPA",
+                stacked: type !== GraphType.BOTH,
                 reverse: false
             }}
             yFormat=" >-.1f"
